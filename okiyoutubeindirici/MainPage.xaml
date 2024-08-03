@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="okiyoutubeindirici.MainPage"
+             NavigationPage.HasNavigationBar="False"
+             >
+
+    <ScrollView>
+        <VerticalStackLayout
+            Background="White"
+            BackgroundColor="White"
+            Padding="30,0"
+            Spacing="25"
+             >
+
+            <Label VerticalOptions="Center" HorizontalOptions="Center" FontSize="Large" Margin="0,200,0,0" TextColor="#121212">Youtube Video İndirici</Label>
+            <Entry Placeholder="Youtube URL Giriniz" PlaceholderColor="#121212" x:Name="videoUrl" TextColor="#121212"></Entry>
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="20">
+                <Button Text="Ses Olarak İndir" BackgroundColor="#121212"  TextColor="White" Clicked="Button_Clicked"></Button>
+                <Button Text="Video Olarak İndir" BackgroundColor="#121212" TextColor="White" Clicked="Button_Clicked_1"></Button>
+            </HorizontalStackLayout>
+            <Label x:Name="sonuc" HorizontalOptions="Center" VerticalOptions="Center" TextColor="#121212"></Label>
+
+
+
+
+
+
+
+
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>
