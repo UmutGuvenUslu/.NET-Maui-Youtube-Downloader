@@ -39,28 +39,28 @@ Uygulamanın XAML arayüzü, servis katmanı ve platform API'leri arasındaki ha
 ```mermaid
 flowchart TD
     subgraph UI_Katmani["📱 Sunum Katmanı (XAML & MVVM)"]
-        A[MainPage.xaml / XAML Arayüzü]
-        B[MainPage.xaml.cs / Code-Behind & Event Handlers]
+        A["MainPage.xaml / XAML Arayüzü"]
+        B["MainPage.xaml.cs / Code-Behind & Event Handlers"]
     end
 
     subgraph Servis_Katmani["⚙️ Servis & İş Mantığı (Core Services)"]
-        C[YouTubeDownloadService.cs]
-        D[Stream & Metadata Parser / YouTubeExplode]
+        C["YouTubeDownloadService.cs"]
+        D["Stream & Metadata Parser / YouTubeExplode"]
     end
 
     subgraph Platform_Katmani["💻 Hedef Platformlar (Platforms Layer)"]
-        E[🪟 Windows / WinUI 3]
-        F[🤖 Android / API 31+]
-        G[🍎 iOS / MacCatalyst]
+        E["🪟 Windows / WinUI 3"]
+        F["🤖 Android / API 31+"]
+        G["🍎 iOS / MacCatalyst"]
     end
 
     subgraph Cikis_Katmani["💾 Yerel Depolama (File System)"]
-        H[(İndirilenler / Downloads Klasörü)]
+        H[("İndirilenler / Downloads Klasörü")]
     end
 
     A <--> B
     B <--> C
-    C <--> D
+    C --> D
     C --> E & F & G
     E & F & G --> H
 ```
@@ -73,25 +73,25 @@ Bir bağlantının girilmesinden yerel diske yazılmasına kadar geçen işlem a
 
 ```mermaid
 flowchart TD
-    Start([👤 Kullanıcı YouTube URL'si Girer]) --> ValidateURL{URL Formatı Geçerli mi?}
+    Start(["👤 Kullanıcı YouTube URL'si Girer"]) --> ValidateURL{"URL Formatı Geçerli mi?"}
     
-    ValidateURL -- Hayır --> ShowError[❌ Geçersiz URL Uyarısı Göster]
+    ValidateURL -- Hayır --> ShowError["❌ Geçersiz URL Uyarısı Göster"]
     ShowError --> Start
     
-    ValidateURL -- Evet --> FetchMeta[🔍 Video Başlığı, Süresi ve Küçük Resmini Çek]
-    FetchMeta --> DisplayMeta[Arayüzde Video Önizlemesini Göster]
-    DisplayMeta --> GetStreamManifest[Mevcut Çözünürlük ve Format Akışlarını Listele]
+    ValidateURL -- Evet --> FetchMeta["🔍 Video Başlığı, Süresi ve Küçük Resmini Çek"]
+    FetchMeta --> DisplayMeta["Arayüzde Video Önizlemesini Göster"]
+    DisplayMeta --> GetStreamManifest["Mevcut Çözünürlük ve Format Akışlarını Listele"]
     
-    GetStreamManifest --> SelectFormat{Kullanıcı Kalite / Format Seçer: MP4 / MP3}
-    SelectFormat --> InitDownload[Yerel Dosya Akışı (FileStream) Başlat]
+    GetStreamManifest --> SelectFormat{"Kullanıcı Kalite / Format Seçer: MP4 / MP3"}
+    SelectFormat --> InitDownload["Yerel Dosya Akışı (FileStream) Başlat"]
     
-    InitDownload --> StreamProgress[⬇️ Parça Parça İndir & İlerleme Çubuğunu Güncelle: %Progress]
-    StreamProgress --> DownloadComplete{İndirme Tamamlandı mı?}
+    InitDownload --> StreamProgress["⬇️ Parça Parça İndir & İlerleme Çubuğunu Güncelle: %Progress"]
+    StreamProgress --> DownloadComplete{"İndirme Tamamlandı mı?"}
     
     DownloadComplete -- Hayır --> StreamProgress
-    DownloadComplete -- Evet --> SaveToStorage[💾 Cihaz Depolama / Downloads Dizinine Kaydet]
-    SaveToStorage --> SuccessAlert[✅ 'İndirme Başarıyla Tamamlandı' Bildirimi]
-    SuccessAlert --> End([🏁 İşlem Tamamlandı])
+    DownloadComplete -- Evet --> SaveToStorage["💾 Cihaz Depolama / Downloads Dizinine Kaydet"]
+    SaveToStorage --> SuccessAlert["✅ İndirme Başarıyla Tamamlandı Bildirimi"]
+    SuccessAlert --> End(["🏁 İşlem Tamamlandı"])
 ```
 
 ---
@@ -102,11 +102,11 @@ Tek bir C# kod tabanının farklı platform motorlarına derlenme mekanizması:
 
 ```mermaid
 flowchart LR
-    A[📄 Ortak C# & XAML Kod Tabanı] --> B{.NET MAUI Compiler}
-    B --> C[🪟 WinUI 3 Native Windows App]
-    B --> D[🤖 Android APK / AAB]
-    B --> E[🍎 macOS Native Cocoa App]
-    B --> F[📱 iOS Native IPA App]
+    A["📄 Ortak C# & XAML Kod Tabanı"] --> B{".NET MAUI Compiler"}
+    B --> C["🪟 WinUI 3 Native Windows App"]
+    B --> D["🤖 Android APK / AAB"]
+    B --> E["🍎 macOS Native Cocoa App"]
+    B --> F["📱 iOS Native IPA App"]
 ```
 
 ---
